@@ -1,6 +1,6 @@
 # Description
 
-Responsive form layout with validation
+The responsive layout of the form with validation
 
 - Responsive layout
 - Saving data in localStorage
