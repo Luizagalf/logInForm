@@ -1,0 +1,74 @@
+@import "src/assets/styles/main.scss";
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10%;
+    row-gap: 30px;
+    padding: 0 10px;
+  }
+
+  &__title {
+    text-align: center;
+    color: $darkViolet;
+    margin: 0;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 80px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+      0px 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  &__subtitle {
+    text-align: center;
+    color: $darkViolet;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0;
+  }
+
+  &__footer {
+    width: 100%;
+    display: flex;
+
+    & img {
+      width: 100%;
+    }
+    & > img:nth-child(1) {
+      position: absolute;
+      opacity: 1;
+    }
+  }
+}
+
+@media (max-width: $big-tablet) and (min-width: #{$phone + 1px}) {
+  .app {
+    &__main {
+      margin-top: 20%;
+    }
+  }
+}
+
+@media (max-width: $phone) {
+  .app {
+    &__main {
+      margin-top: 30%;
+    }
+    &__title {
+      font-size: 40px;
+      line-height: 60px;
+    }
+    &__subtitle {
+      font-size: 16px;
+      line-height: 18px;
+    }
+  }
+}
