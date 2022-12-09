@@ -4,9 +4,24 @@ import OpenEye from "assets/img/OpenEye.svg";
 import CloseEye from "assets/img/CloseEye.svg";
 import { observer } from "mobx-react-lite";
 import { useStores } from "stores";
+import { Data } from "types/data";
 
 const Form = () => {
   const { dataStore } = useStores();
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
+  const [values, setValues] = useState<Data>({
+    login: "",
+    password: "",
+    rememberMe: false
+  });
+  const [errors, setErrors] = useState<{
+    password: string;
+    rememberMe: string;
+  }>({
+    password: "",
+    rememberMe: ""
+  });
+
   useEffect(() => {
     dataStore.getDataFromLocalStorage();
   }, []);
@@ -21,18 +36,7 @@ const Form = () => {
     });
   }, [dataStore.data]);
 
-  const [values, setValues] = useState({
-    login: "",
-    password: "",
-    rememberMe: false
-  });
-  const [errors, setErrors] = useState({
-    password: "",
-    rememberMe: ""
-  });
-  const [isShowPassword, setIsShowPassword] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     switch (e.target.name) {
       case "rememberMe":
         setValues({ ...values, [e.target.name]: e.target.checked });
@@ -59,7 +63,7 @@ const Form = () => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     if (values.rememberMe) {
       dataStore.setDataInLocalStorage(values);
     }
@@ -119,14 +123,16 @@ const Form = () => {
         disabled={!values.login || !values.password}
       />
       <div className="form__errors">
-        {Object.entries(errors).map(([key, error]) => (
-          <p
-            key={key}
-            style={{ color: key === "password" ? "red" : "#807490" }}
-          >
-            {error}
-          </p>
-        ))}
+        {Object.entries(errors).map(
+          ([key, error]: [string, string]): JSX.Element => (
+            <p
+              key={key}
+              style={{ color: key === "password" ? "red" : "#807490" }}
+            >
+              {error}
+            </p>
+          )
+        )}
       </div>
     </form>
   );

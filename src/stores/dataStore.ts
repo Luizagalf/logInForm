@@ -1,6 +1,5 @@
 import { makeAutoObservable } from "mobx";
-
-type Data = { login: string; password: string; rememberMe: boolean };
+import { Data } from "types/data";
 
 class DataStore {
   data: Data = {
@@ -9,13 +8,13 @@ class DataStore {
     rememberMe: false
   };
 
-  getDataFromLocalStorage = () => {
+  getDataFromLocalStorage = (): void => {
     if (localStorage.getItem("loginData") !== null) {
       this.data = JSON.parse(localStorage.getItem("loginData") as string);
     }
   };
 
-  setDataInLocalStorage = (value: Data) => {
+  setDataInLocalStorage = (value: Data): void => {
     localStorage.setItem("loginData", JSON.stringify(value));
   };
 
