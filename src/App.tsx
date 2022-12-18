@@ -3,7 +3,7 @@ import BackWave from "assets/img/BackWave.png";
 import FrontWave from "assets/img/FrontWave.png";
 import Form from "components/Form";
 
-const App = () => {
+function App(): JSX.Element {
   return (
     <div className="app">
       <div className="app__main">
@@ -19,6 +19,6 @@ const App = () => {
       </div>
     </div>
   );
-};
+}
 
 export default App;

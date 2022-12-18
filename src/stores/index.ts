@@ -1,5 +1,5 @@
-import DataStore from "./dataStore";
 import { createContext, useContext } from "react";
+import DataStore from "./dataStore";
 
 export default class RootStore {
   dataStore = new DataStore();

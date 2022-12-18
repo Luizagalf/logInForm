@@ -26,11 +26,13 @@
     width: 100%;
     position: relative;
 
-    & img {
+    & > button {
       position: absolute;
       right: 5%;
       top: 14%;
       cursor: pointer;
+      background-color: transparent;
+      border: none;
     }
   }
 
@@ -107,5 +109,6 @@
     font-weight: 300;
     font-size: 14px;
     line-height: 17px;
+    height: 110px;
   }
 }

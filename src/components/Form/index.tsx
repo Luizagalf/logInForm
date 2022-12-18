@@ -1,12 +1,12 @@
 import "./form.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FormEvent, ChangeEvent } from "react";
 import OpenEye from "assets/img/OpenEye.svg";
 import CloseEye from "assets/img/CloseEye.svg";
 import { observer } from "mobx-react-lite";
 import { useStores } from "stores";
 import { Data } from "types/data";
 
-const Form = () => {
+function Form(): JSX.Element {
   const { dataStore } = useStores();
   const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
   const [values, setValues] = useState<Data>({
@@ -36,7 +36,7 @@ const Form = () => {
     });
   }, [dataStore.data]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     switch (e.target.name) {
       case "rememberMe":
         setValues({ ...values, [e.target.name]: e.target.checked });
@@ -63,7 +63,7 @@ const Form = () => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     if (values.rememberMe) {
       dataStore.setDataInLocalStorage(values);
     }
@@ -100,13 +100,17 @@ const Form = () => {
           className="form__input"
           autoComplete="on"
         />
-        <img
-          src={isShowPassword ? OpenEye : CloseEye}
-          alt={isShowPassword ? "Hide password" : "Show password"}
+        <button
+          type="button"
           onClick={() => setIsShowPassword(!isShowPassword)}
-        />
+        >
+          <img
+            src={isShowPassword ? OpenEye : CloseEye}
+            alt={isShowPassword ? "Hide password" : "Show password"}
+          />
+        </button>
       </div>
-      <label className="form__label">
+      <label className="form__label" htmlFor="checkbox">
         <input
           name="rememberMe"
           type="checkbox"
@@ -136,6 +140,6 @@ const Form = () => {
       </div>
     </form>
   );
-};
+}
 
 export default observer(Form);
